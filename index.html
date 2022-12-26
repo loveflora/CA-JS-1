@@ -66,6 +66,15 @@
 
     <button id="openModal" type="button">열기</button>
 
+    <p>태조 이성계가 태어난 년도는?</p>
+    <input type="text" id="answer" />
+    <button id="send-answer">제출</button>
+
+    <div class="alert alert-danger">
+      <span id="second">5</span>
+      초 이내 구매 시 사은품 증정 !
+    </div>
+
     <script>
       document.querySelector(".hello").innerHTML = "바보";
       $(".hello").html("하이");
@@ -157,6 +166,39 @@
       // }
 
       // 합격했냐(130, -1);
+
+      var 클릭 = 0;
+
+      $("#send-answer").on("click", function () {
+        클릭 += 1;
+        var 답 = $("#answer").val();
+        if (답 == "1335") {
+          alert("성공");
+        } else if (클릭 >= 3 && 답 != "1335") {
+          alert("멍청아");
+        }
+      });
+
+      // setInterval(function () {
+      //   $(".alert").hide();
+      //   console.log("안녕");
+      // }, 1000);
+
+      // setTimeout(함수, 1000);
+
+      // function 함수() {
+      //   console.log("안녕");
+      // }
+      var timer = 5;
+
+      setInterval(function () {
+        timer--;
+        if (timer >= 0) {
+          $("#second").html(timer);
+        } else if (timer < 0) {
+          $(".alert").hide();
+        }
+      }, 1000);
     </script>
   </body>
 </html>
