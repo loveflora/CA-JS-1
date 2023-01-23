@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.6.2.min.js"
+      integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+    
+          <!-- <div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>Card title</h5>
+            <p>가격 : 70000</p>
+          </div> -->
+    
+      </div>
+    </div>
+    </div>
+<div class="container">
+ <div class="btn btn-danger" id="btn">더보기</div> 
+</div>
+<div class="container">
+  <button class="btn btn-danger" id="price">가격순 정렬</button>
+</div>
+<div class="container">
+  <button class="btn btn-danger" id="korean">가나다순 정렬</button>
+</div>
+<div class="container">
+  <button class="btn btn-danger" id="belows">6만원 이하 상품</button>
+</div>
+
+<div class="container">
+  <input id="won">
+  <button class="btn btn-danger" id="filter">이하 상품</button>
+</div>
+
+<div class="container">
+  <input id="won">
+  <button class="btn btn-danger" id="origin">원래 순서대로</button>
+</div>
+
+<div class="container">
+<button class="btn btn-danger" id="cart">장바구니</button>
+</div>
+
+    <script>
+       // 서버에서 보낸 데이터
+       var products = [
+        { id: 0, price: 70000, title: "Blossom Dress" },
+        { id: 1, price: 50000, title: "Springfield Shirt" },
+        { id: 2, price: 60000, title: "Black Monastery" },
+      ];
+
+      var copy = [...products]
+
+var count = 0;
+
+      products.forEach((a, i)=> {
+        var 템플릿 =  `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${a.title}</h5>
+            <p>가격 : ${a.price}</p>
+            <button class="buy">구매</button>
+          </div>`
+          $(".row").append(템플릿)
+      })
+
+      $("#btn").on("click", function() {$.get("https://codingapple1.github.io/js/more1.json").done((data) => {
+        console.log(data);
+        data.forEach((a, i) => {
+          var 템플릿 =  `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${a.title}</h5>
+            <p>가격 : ${a.price}</p>
+          </div>`
+          $(".row").append(템플릿)
+        }) 
+      });
+    })
+      
+
+    // 1) 구매버튼 누르면
+    // 2) 지금 누른 버튼(e.target) 위위 글자(siblings) 가져와서
+    // 3) localStorage에 [글자] 저장
+
+    $(".buy").click(function(e) {
+      // $(e.target).siblings("h5").html() 내용물만
+      var title = $(e.target).siblings("h5").text();
+
+// (3-1) 만약에 이미 cart 라는 항목이 있으면 수정하기(꺼내서 - 자료 추가 - 다시 넣기)
+// (3-2) 아니면 클릭항목 추가하기
+
+if (localStorage.getItem("cart") != null) {
+  var 꺼냄 = JSON.parse(localStorage.cart)
+  꺼냄.push(title)
+  localStorage.setItem("cart", JSON.stringify(꺼냄))
+  console.log(꺼냄)
+} else 
+      localStorage.setItem("cart", JSON.stringify([title]))
+    })
+
+
+// 중복제거
+
+// 수량 항목 추가
+
+$("#cart").click(function() {
+  location.href="./cart2.html"
+})
+
+
+ $("#btn").on("click", function() {
+  $.get("https://codingapple1.github.io/js/more2.json").done((data) => {
+  count++;
+  if (count == 1) {
+  $("#btn").hide()
+}
+  data.forEach((a, i) => {
+    var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100"><h5>${a.title}</h5><p>가격 : ${a.price}</div>`
+              $(".row").append(템플릿)
+  })
+ })
+})
+
+console.log(count)
+// 함수로 만들어두기
+
+// 버튼 사라지기
+
+// var arr = ["가", "하", "라", "파", "나"]
+// arr.sort(function(a, b) {
+//  if(a > b) return -1 
+//  else if (a < b) return 1
+//  else if (a == b) return 0
+// });
+// console.log(arr)
+
+
+// 카드 3개 있던 div 내용 제거 (html 지우기)
+function 함수 () {
+  $(".row").html("")
+
+// products 개수 만큼 카드 생성 (html 생성)
+products.forEach((a, i)=> {
+        var 템플릿 =  `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${a.title}</h5>
+            <p>가격 : ${a.price}</p>
+           
+          </div>`
+          $(".row").append(템플릿)
+      })
+}
+
+
+// 가격순
+$("#price").click(function() {
+  products.sort(function(a, b) {
+    return a.price - b.price
+  })
+
+  함수()
+});
+
+
+  // 가나다 순
+  $("#korean").click(function() {
+  products.sort(function(a, b) {
+    if (a.tilte > b.title) return 1;
+    else if (b.title > a.title) return -1;
+    else if (a.title == b.title) return 0;
+  })
+  함수();
+})
+
+
+// 6만원 이하 상품만
+$("#belows").click(function() {
+ var newArr =  products.filter(function(a) {return a.price <= 60000})
+ console.log(newArr)
+  $(".row").html("")
+
+// products 개수 만큼 카드 생성 (html 생성)
+newArr.forEach((a, i)=> {
+        var 템플릿 =  `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${a.title}</h5>
+            <p>가격 : ${a.price}</p>
+            
+          </div>`
+          $(".row").append(템플릿)
+      })
+
+});
+
+
+
+
+// input value 이하 상품
+$("#filter").click(function() {
+  var newProducts = products.filter(a => {return a.price <= $("#won").val()})
+  console.log($("#won").val())
+
+  $(".row").html("")
+  newProducts.forEach((a, i)=> {
+        var 템플릿 =  `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100">
+            <h5>${a.title}</h5>
+            <p>가격 : ${a.price}</p>
+          </div>`
+          $(".row").append(템플릿)
+      })
+})
+
+
+// 원래 순서대로
+
+
+
+    </script>
+  </body>
+</html>

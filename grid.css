@@ -1,0 +1,32 @@
+.grey {
+  background: lightgray;
+  height: 2000px;
+  margin-top: 500px;
+  display: flex;
+}
+
+/* .image {
+  float: right;
+  width: 400px;
+  position: sticky;
+  top: 100px;
+}
+
+.text {
+  float: left;
+  width: 300px;
+  position: sticky;
+} */
+
+.image {
+  position: sticky;
+  top: 100px;
+  width: 400px;
+  height: 400px;
+  margin-left: auto;
+}
+
+.text {
+  display: inline-block;
+  margin-right: auto;
+}

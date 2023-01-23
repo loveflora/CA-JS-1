@@ -21,7 +21,23 @@
   </head>
 
   <body>
-    <div class="black-bg show-modal">
+    <nav class="navbar navbar-light bg-light" id="light1">
+      <div class="container-fluid">
+        <span class="navbar-brand">Navbar</span>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </nav>
+    <ul class="list-group">
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul>
+    <div class="box" style="height: 100px"></div>
+    <div class="black-bg">
       <div class="white-bg">
         <h4>로그인하세요</h4>
         <form action="success.html">
@@ -37,23 +53,6 @@
         </form>
       </div>
     </div>
-
-    <nav class="navbar navbar-light bg-light" id="light1">
-      <div class="container-fluid">
-        <span class="navbar-brand">Navbar</span>
-        <button class="navbar-toggler" type="button">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </nav>
-
-    <ul class="list-group">
-      <li class="list-group-item">An item</li>
-      <li class="list-group-item">A second item</li>
-      <li class="list-group-item">A third item</li>
-      <li class="list-group-item">A fourth item</li>
-      <li class="list-group-item">And a fifth one</li>
-    </ul>
 
     <nav class="navbar navbar-light bg-light" id="light2">
       <div class="container-fluid">
@@ -75,7 +74,136 @@
       초 이내 구매 시 사은품 증정 !
     </div>
 
+    <div class="process"></div>
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="car1.png" draggable="false" />
+        </div>
+        <div class="slide-box">
+          <img src="car2.png" />
+        </div>
+        <div class="slide-box">
+          <img src="car3.png" />
+        </div>
+      </div>
+    </div>
+
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="next">다음</button>
+    <button class="prev">이전</button>
+
+    <div style="height: 200px"></div>
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+      laboriosam ipsam deserunt tempora quis? Nostrum iure excepturi animi,
+      beatae, facere laboriosam ipsum, reprehenderit qui vel est voluptate odio
+      ex placeat.
+    </div>
+
     <script>
+      // 활용 1. 페이지 스크롤바 100px 내리면, 로고 폰트사이즈 작게
+      $(window).on("scroll", function () {
+        if (window.scrollY > 100) {
+          $(".navbar-brand").css("font-size", "20px");
+        } else {
+          $(".navbar-brand").css("font-size", "30px");
+        }
+      });
+
+      // 활용 2. 회원약관 박스 거의 끝까지 스크롤하면 alert 띄우기
+
+      // div의 스크롤바 내린 양 + 눈에 보이는 div 박스 높이 100px > div 실제높이 - 10
+      // 스크롤바 : 바닥 ~ 10px 위치에 있을 때 alert 띄워줌
+      $(".lorem").on("scroll", function () {
+        var 스크롤양 = document.querySelector(".lorem").scrollTop;
+        var 실제높이 = document.querySelector(".lorem").scrollHeight;
+        var 높이 = document.querySelector(".lorem").clientHeight;
+        if (스크롤양 + 높이 > 실제높이 - 5) {
+          alert("다 읽음");
+        }
+      });
+
+      document.querySelector("html").scrollHeight; // 현재 웹페이지 실제 높이
+      document.querySelector("html").clientHeight; // 현재 웹페이지 보이는 높이
+      window.scrollY; // 현재 웹페이지 스크롤양
+
+      $(".process").on("scroll", function () {
+        var 웹페이지스크롤양 = document.querySelector(".process").clientHeight;
+
+        const height = 실제높이;
+        $(".process").css("width", 웹페이지스크롤양 + "%");
+      });
+
+      // <div> 스크롤바 내린 높이 : 셀렉터.scrollTop
+      // <div> 실제 높이 : 셀렉터.scrollHeight
+
+      // if (스크롤양 == 100) {
+      //   $("").css("transform");
+      // }
+
+      // $(".slide-1").on("click", function () {
+      //   $(".slide-container").css("transform", "translateX(0)");
+      // });
+
+      // $(".slide-2").on("click", function () {
+      //   $(".slide-container").css("transform", "translateX(-100vw)");
+      //   // .css() : style 속성 변경
+      // });
+
+      // $(".slide-3").on("click", function () {
+      //   $(".slide-container").css("transform", "translateX(-200vw)");
+      // });
+
+      // 다음 버튼 누르면,
+      // 지금 보이는 사진이 1이면 -> 2번 사진 보여주세요
+      // 지금 보이는 사진이 2이면 -> 3번
+
+      // 지금 사진 -- 변수 : 포스트잇 붙여 놓기
+      var 지금사진 = 1;
+
+      // $(".next").on("click", function () {
+      //   if (지금사진 == 1) {
+      //     $(".slide-container").css("transform", "translateX(-100vw)");
+      //     지금사진++;
+      //   } else if (지금사진 == 2) {
+      //     $(".slide-container").css("transform", "translateX(-200vw)");
+      //     지금사진++;
+      //   } else if (지금사진 == 3) {
+      //     $(".slide-container").css("transform", "translateX(0vw)");
+      //     지금사진 = 1;
+      //   }
+      // });
+
+      // $(".prev").on("click", function () {
+      //   if (지금사진 == 3) {
+      //     $(".slide-container").css("transform", "translateX(-100vw)");
+      //     지금사진--;
+      //   } else if (지금사진 == 2) {
+      //     $(".slide-container").css("transform", "translateX(0vw)");
+      //     지금사진--;
+      //   } else if (지금사진 == 1) {
+      //     $(".slide-container").css("transform", "translateX(-200vw)");
+      //     지금사진 = 3;
+      //   }
+      // });
+
+      // 지금사진 == 1 --> -100 vw 이동
+      // 지금사진 == 2 --> -200
+      // 지금사진 == 3 --> -300
+      // 지금사진 == 4 --> -400
+      // ...
+
+      $(".next").on("click", function () {
+        $(".slide-container").css(
+          "transform",
+          "translateX(-" + 지금사진 + "00vw)",
+        );
+        지금사진++;
+      });
+
       document.querySelector(".hello").innerHTML = "바보";
       $(".hello").html("하이");
       $(".hello").css("color", "red");
@@ -96,20 +224,30 @@
         $(".black-bg").removeClass("showModal");
       });
 
-      // $("form").on("submit", function () {
-      //   if ($("#email").val() == "") {
-      //     alert("아이디 입력해주세요");
-      //     return false;
-      //   } else if ($("#password").val() == "") {
-      //     alert("비밀번호 입력해주세요");
-      //     return false;
-      //   }
-      //   if ($("#password").val().length < 6) {
-      //     alert("비밀번호 6자 이상으로 입력해주세요");
-      //     return false;
-      //   }
-      //   // length 따로 만들면 안됨
-      // });
+      $("form").on("submit", function () {
+        var 아이디입력값 = $("#email").val();
+        var 비번입력값 = $("#password").val();
+        if (아이디입력값 == "") {
+          alert("아이디 입력해주세요");
+          return false;
+        } else if (비번입력값 == "") {
+          alert("비밀번호 입력해주세요");
+          return false;
+        }
+        if ($("#password").val().length < 6) {
+          alert("비밀번호 6자 이상으로 입력해주세요");
+          return false;
+        }
+        if (/\S+@\S+\.\S+/.test(아이디입력값) == false) {
+          alert("이메일 형식이 아닙니다");
+          return false;
+        }
+        if (/\S+[A-Z]\S+/.test(비번입력값)) {
+          alert("비밀번호에 대문자는 사용불가합니다");
+          return false;
+        }
+        // length 따로 만들면 안됨
+      });
 
       $("#email").on("change", function () {
         if ($("#email").val().length < 4) {
@@ -199,6 +337,58 @@
           $(".alert").hide();
         }
       }, 1000);
+
+      function 함수(a, b) {
+        return (a * 60 + b) * 1000;
+      }
+
+      console.log(함수(1, 30));
+      console.log(함수(2, 10));
+
+      function 가격(a, b) {
+        if (b == false) {
+          return parseFloat((a * 0.9).toFixed(1));
+        } else if (b == true) {
+          return parseFloat((a * 0.9 - 1.5).toFixed(1));
+        }
+      }
+
+      console.log(가격(70, false));
+      console.log(가격(10, true));
+
+      // 스크롤바 100px 이상 내리면, 로고 폰트 사이즈 줄이기
+
+      // < 드래그 + 이미지 슬라이드 >
+      // 기능 1. 드래그한 거리만큼 사진도 왼쪽으로 움직임
+      var 시작좌표 = 0;
+      var 눌렀냐 = false;
+      // 전역변수
+
+      $(".slide-box")
+        .eq(0)
+        .on("mousedown", function (e) {
+          시작좌표 = e.clientX;
+          눌렀냐 = true;
+        });
+
+      $(".slide-box")
+        .eq(0)
+        .on("mousemove", function (e) {
+          // 마우스 찍은 후에, 박스 움직이게 해주세요
+          var 이동거리 = e.clientX - 시작좌표;
+          if (눌렀냐 == true) {
+            $(".slide-container").css("transform", `translateX(${이동거리}px)`);
+          }
+        });
+
+      $(".slide-box")
+        .eq(0)
+        .on("mouseup", function (e) {
+          눌렀냐 = false;
+        });
+
+      // 기능 2. 손 놓으면, 2번째 사진 보임
+      // (100px 이상 이동 시, 둘째 사진 보임 -- 아니면 첫째 사진)
     </script>
   </body>
 </html>

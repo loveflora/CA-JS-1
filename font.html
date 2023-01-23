@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- 남의 사이트에서 css 파일 가져옴 : CDN 방법 () -->
+    <link href="font.css" rel="stylesheet" />
+  </head>
+  <body>
+    <i class="fa-solid fa-cart-shopping fa-3x"></i>
+    <div class="shop-bg">
+      <div class="shop-container">
+        <div class="shop-item">
+          <div style="position: relative"></div>
+          <!-- 기준점을 주는거임 : relative에 absolute 붙는거임 -->
+          <div class="overlay"></div>
+          <img src="./product1-1.jpg" />
+        </div>
+
+        <div class="shop-item">
+          <div style="position: relative"></div>
+          <div class="overlay-wrap">
+            <div class="overlay1">
+              <span style="color: white">$60</span>
+            </div>
+            <img src="./product2.jpg" />
+          </div>
+        </div>
+
+        <div class="shop-item"><img src="./product3.jpg" /></div>
+      </div>
+    </div>
+  </body>
+</html>

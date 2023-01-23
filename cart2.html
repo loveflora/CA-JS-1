@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>장바구니</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.2.min.js"
+      integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div>장바구니 페이지</div>
+    <p class="item"></p>
+    <script>
+      // local storage 에서 cart 꺼내주세요
+      var 카트 = JSON.parse(localStorage.getItem("cart"));
+      console.log(카트);
+      // array 남을 듯
+      // array 갯수만큼 p 생성해주세요
+
+      카트.forEach((a, i) => {
+        $(".item").append(`<p>${a}</p>`);
+      });
+    </script>
+  </body>
+</html>

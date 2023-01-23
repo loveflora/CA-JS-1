@@ -1,3 +1,21 @@
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+}
+
+.navbar-brand {
+  font-size: 30px;
+  transition: all 1s;
+}
+
+.process {
+  background-color: black;
+  height: 10px;
+  width: 1%;
+  /* transition: all 1s; */
+}
+
 .darkMode {
   background: black;
   color: white;
@@ -38,4 +56,23 @@
   opacity: 1;
   visibility: visible;
   /* display: block; */
+}
+
+.slide-container {
+  width: 300vw;
+  /* 브라우저의 3배 */
+
+  /* transform: translate(-100vw); */
+  /* margin-left: -200vw; 보다 부드러움 */
+  transition: all 1s;
+}
+
+.slide-box {
+  width: 100vw;
+  /* 브라우저 폭 100vw */
+  float: left;
+}
+
+.slide-box img {
+  width: 100%;
 }
